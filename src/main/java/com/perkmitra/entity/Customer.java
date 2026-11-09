@@ -1,7 +1,9 @@
+
 package com.perkmitra.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -9,19 +11,17 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Table(name = "customers", schema = "app",
-       uniqueConstraints = {
-           @UniqueConstraint(name = "uk_customers_id_business", columnNames = {"id", "business_id"})
-       })
+@Table(name = "customers", schema = "app")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -49,4 +49,3 @@ public class Customer {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 }
-

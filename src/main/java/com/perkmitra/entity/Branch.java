@@ -12,8 +12,8 @@ import java.util.UUID;
 @Table(name = "branches", schema = "app")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class Branch {
 
@@ -46,4 +46,3 @@ public class Branch {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 }
-

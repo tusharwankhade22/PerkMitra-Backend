@@ -9,19 +9,17 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Table(name = "campaigns", schema = "app",
-       uniqueConstraints = {
-           @UniqueConstraint(name = "uk_campaigns_id_business", columnNames = {"id", "business_id"})
-       })
+@Table(name = "campaigns", schema = "app")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Campaign {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -46,7 +44,7 @@ public class Campaign {
 
     @Column(name = "status", nullable = false, length = 20)
     @Builder.Default
-    private String status = "DRAFT"; // DRAFT, ACTIVE, PAUSED, ARCHIVED
+    private String status = "DRAFT";
 
     @Column(name = "start_at")
     private Instant startAt;
@@ -62,4 +60,3 @@ public class Campaign {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 }
-

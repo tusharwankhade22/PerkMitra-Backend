@@ -12,9 +12,8 @@ import java.util.UUID;
 @Table(name = "businesses", schema = "app")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Business {
 
     @Id
@@ -37,7 +36,6 @@ public class Business {
     private String contactPhone;
 
     @Column(name = "status", nullable = false, length = 20)
-    @Builder.Default
     private String status = "ACTIVE";
 
     @CreationTimestamp
@@ -48,4 +46,3 @@ public class Business {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 }
-
