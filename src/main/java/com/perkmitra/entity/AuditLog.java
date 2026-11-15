@@ -3,9 +3,13 @@ package com.perkmitra.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
+import java.util.Map;
 import java.util.UUID;
+import java.net.InetAddress;
 
 @Entity
 @Table(name = "audit_logs", schema = "app")
@@ -42,14 +46,16 @@ public class AuditLog {
     @Column(name = "entity_id")
     private UUID entityId;
 
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "old_values", columnDefinition = "jsonb")
-    private String oldValues;
+    private Map<String, Object> oldValues;
 
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "new_values", columnDefinition = "jsonb")
-    private String newValues;
+    private Map<String, Object> newValues;
 
     @Column(name = "ip_address", columnDefinition = "inet")
-    private String ipAddress;
+    private InetAddress ipAddress;
 
     @Column(name = "user_agent", columnDefinition = "TEXT")
     private String userAgent;
@@ -58,4 +64,3 @@ public class AuditLog {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 }
-

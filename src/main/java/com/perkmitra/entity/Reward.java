@@ -40,7 +40,6 @@ public class Reward {
     @Column(name = "code_hash", length = 255)
     private String codeHash;
 
-    @CreationTimestamp
     @Column(name = "earned_at", nullable = false, updatable = false)
     private Instant earnedAt;
 
@@ -62,4 +61,3 @@ public class Reward {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 }
-
