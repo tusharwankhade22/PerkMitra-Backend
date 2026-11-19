@@ -40,4 +40,3 @@ public class SocialLink {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 }
-
